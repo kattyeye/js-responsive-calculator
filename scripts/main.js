@@ -1,6 +1,41 @@
+const numButtons = document.querySelectorAll('.number');
+numButtons.forEach(button => {
+    button.addEventListener('click', function pushNumber(event) {;
+        console.log(event.target);       
+        alert(event.target.value);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // * Define a function named `pushNumber` that `alert()`s the number associated with its event argument when called; add this function as an event listener for the number buttons
 
-const numButtons = document.querySelectorAll('.number');
+//     function pushNumber(newNumber) {
+        
+//         numButtons.nodeValue = newNumber;
+//             alert(newNumber);
+//     }
+
+// const el = document.querySelector('button');
+// el.addEventListener('click', function() {pushNumber (newNumber)});
+
+// const numButtons = document.querySelectorAll('.number');
 // const operatorButton = document.querySelectorAll('.operator');
 // const equalButton = document.querySelector('.equal-sign');
 // const percentButton = document.querySelector('.percent');
@@ -14,11 +49,21 @@ const numButtons = document.querySelectorAll('.number');
 // }
 // }
 
-document.querySelectorAll('.number').forEach(item => {
-    item.addEventListener('click', function pushNumber() {
-        alert(document.querySelector('.number').textContent);
-    })
-  });
+//     numButtons.forEach(button => {
+//         button.addEventListener('click', function pushNumber(newNumber) {;
+//             // alert(document.querySelector('.number').textContent);
+//             numButtons.forEach.nodeValue = newNumber;
+            
+//         });
+//   });
+
+
+//   function pushNumber(newNumber) {
+//         const numButtons = document.querySelectorAll('.number');
+//         numButtons.forEach.nodeValue = newNumber;
+           
+//   }
+
 
 
 

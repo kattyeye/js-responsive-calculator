@@ -1,3 +1,5 @@
+
+
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(button => {
     button.addEventListener('click', function pushNumber(event) {;
@@ -6,9 +8,23 @@ numButtons.forEach(button => {
     });
 });
 
+const operatorButtons = document.querySelectorAll('.operator');
+operatorButtons.forEach(button => {
+    button.addEventListener('click', function pushOperator (event) {
+        alert(event.target.value);
+    })
+})
 
+const equals = document.querySelectorAll('.equal-sign');
+    equals.forEach(button => {
+        button.addEventListener('click', function calculate (event) {
+            alert(event.target.value)
+        })
+})
+    
+// * Define a variable `calculation` pointing to an empty array
 
-
+let calculation = [];
 
 
 

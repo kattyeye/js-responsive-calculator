@@ -1,35 +1,43 @@
 
-
 const numButtons = document.querySelectorAll('.number');
 numButtons.forEach(button => {
     button.addEventListener('click', function pushNumber(event) {;
-        console.log(event.target);       
+        // console.log(event.target.value);       
         alert(event.target.value);
+        
     });
 });
 
-const operatorButtons = document.querySelectorAll('.operator');
+const operatorButtons = document.querySelectorAll('.operator, .clear, .plus-minus, .percent');
 operatorButtons.forEach(button => {
     button.addEventListener('click', function pushOperator (event) {
         alert(event.target.value);
     })
 })
 
+
 const equals = document.querySelectorAll('.equal-sign');
     equals.forEach(button => {
         button.addEventListener('click', function calculate (event) {
             alert(event.target.value)
+            calculation.push(event.target.value);
         })
 })
+const calculation = [];
+
     
 // * Define a variable `calculation` pointing to an empty array
-
-let calculation = [];
-
+// * Using `Array.prototype.push`, perform actions on the `calculation` variable when numbers and operators are pressed
 
 
+console.log(calculation);
+//     calculation.forEach(button => {
+//         button.addEventListener('click', function workingCalc() {
+//             Array.prototype.push();
+//         });
+//     });
 
-
+// console.log(calculation); 
 
 
 

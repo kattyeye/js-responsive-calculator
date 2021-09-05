@@ -1,109 +1,110 @@
+const calculation = [];
+let calcDisplay = document.getElementsByClassName("calculator-screen");
 
-const numButtons = document.querySelectorAll('.number');
-numButtons.forEach(button => {
-    button.addEventListener('click', function pushNumber(event) {;
-        // console.log(event.target.value);       
-        alert(event.target.value);
-        
-    });
+let showTotal = function () {
+  let total;
+  for (let i = 0; i < calculation.length; i++) {
+      if (calculation[i] === 'plus-minus'){
+          total = total.split(calculation[i - 1])
+          if (calculation[i - 1] && calculation[i - 1] > 0) {
+                calculation[i - 1] = -calculation[i - 1];
+                console.log(calculation[i - 1])
+          } else if (calculation[i - 1] && calculation[i - 1] < 0) {
+            calculation[i - 1] = Math.abs(calculation[i - 1]);
+          } 
+        //   figure out what to do in case the negative number is the first num
+          total = `${total}${calculation[i - 1]}`;
+      }
+    if (total) {
+      total = `${total}${calculation[i]}`;
+    } else {
+      total = `${calculation[i]}`;
+    }
+
+    // .value = `${calcDisplay.value}${calculation[i]}`;
+    // console.log(calculation[i]);
+  }
+
+  document.getElementsByClassName("calculator-screen")[0].value = total;
+};
+
+const numButtons = document.querySelectorAll(".number");
+numButtons.forEach((button) => {
+  button.addEventListener("click", function pushNumber(event) {
+    // console.log(event.target.value);
+    alert(event.target.value);
+    calculation.push(event.target.value);
+    showTotal();
+  });
 });
 
-const operatorButtons = document.querySelectorAll('.operator, .clear, .plus-minus, .percent');
-operatorButtons.forEach(button => {
-    button.addEventListener('click', function pushOperator (event) {
-        alert(event.target.value);
-    })
-})
+const operatorButtons = document.querySelectorAll(
+  ".operator, .clear, .plus-minus, .percent"
+);
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", function pushOperator(event) {
+    alert(event.target.value);
+    calculation.push(event.target.value);
+    console.log({ calculation });
+    showTotal();
+  });
+});
 
-
-const equals = document.querySelectorAll('.equal-sign');
-    equals.forEach(button => {
-        button.addEventListener('click', function calculate (event) {
-            alert(event.target.value)
-            calculation.push(event.target.value);
-        })
-})
-const calculation = [];
-
+const equals = document.querySelectorAll(".equal-sign");
+equals.forEach((button) => {
+  button.addEventListener("click", function calculate(event) {
+    calculation.push("=");
+    let total = 0;
+    let symbols = ["+", "-", "/", "*", "%", "="];
+    let previousSymbolIndex = 0;
+    let previousSymbol;
     
-// * Define a variable `calculation` pointing to an empty array
-// * Using `Array.prototype.push`, perform actions on the `calculation` variable when numbers and operators are pressed
+    for (let i = 0; i < calculation.length; i++) {
+      if (symbols.includes(calculation[i])) {
+          let firstNum;
 
+        firstNum = calculation.slice(previousSymbolIndex, i).join("");
+        calculatedNum = parseInt(firstNum)
 
-console.log(calculation);
-//     calculation.forEach(button => {
-//         button.addEventListener('click', function workingCalc() {
-//             Array.prototype.push();
-//         });
-//     });
+        if(i === 0){
+            total = calculatedNum
+        }
 
-// console.log(calculation); 
-
-
-
-
-
-
-
-
-
-
-// * Define a function named `pushNumber` that `alert()`s the number associated with its event argument when called; add this function as an event listener for the number buttons
-
-//     function pushNumber(newNumber) {
+        previousSymbolIndex = i + 1;
         
-//         numButtons.nodeValue = newNumber;
-//             alert(newNumber);
-//     }
-
-// const el = document.querySelector('button');
-// el.addEventListener('click', function() {pushNumber (newNumber)});
-
-// const numButtons = document.querySelectorAll('.number');
-// const operatorButton = document.querySelectorAll('.operator');
-// const equalButton = document.querySelector('.equal-sign');
-// const percentButton = document.querySelector('.percent');
-// const plusMinus = document.querySelector('.plus-minus');
-// const numLgButton = document.querySelector('.number btn-lg');
-// const decimalButton = document.querySelector('decimal');
-
-// function pushNumber(){
-//     if (pushNumber === numButtons) {
-//         alert(Number);
-// }
-// }
-
-//     numButtons.forEach(button => {
-//         button.addEventListener('click', function pushNumber(newNumber) {;
-//             // alert(document.querySelector('.number').textContent);
-//             numButtons.forEach.nodeValue = newNumber;
+        if (!previousSymbol) {
+            total = calculatedNum;
+        }
+        switch (previousSymbol) {
+          case '+':
+            total = total + calculatedNum;
+            break;
             
-//         });
-//   });
+            break;
+          case '-':
+            total = total - calculatedNum;
+            break;
+          case '/':
+            total = total / calculatedNum;
+            break;
+            case '*':
+            total = total * calculatedNum;
+            break;
+            case '%':
+                total = calculatedNum / 100;
+            break;
+            case "=" :
+                total = total;
+                break   
+        }
+        previousSymbol = calculation[i]
 
 
-//   function pushNumber(newNumber) {
-//         const numButtons = document.querySelectorAll('.number');
-//         numButtons.forEach.nodeValue = newNumber;
-           
-//   }
+      }
+      document.getElementsByClassName("calculator-screen")[0].value = total;
+    }
+    alert(event.target.value);
+    console.log({ calculation });
+  });
+});
 
-
-
-
-
-// function pushNumber () {
-//     console.log("pushed");
-//     numButton.removeEventListener("click", pushNumber);
-//     alert("button clicked");
-// } 
-
-
-
-//     function pushNumber() {
-//         alert();
-//  }
-// numButton.addEventListener("click",pushNumber);
-
-
-    

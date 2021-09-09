@@ -1,7 +1,9 @@
-const calculation = [];
-let calcDisplay = document.getElementsByClassName("calculator-screen");
+let calculation = [];
+let calcDisplay = document.querySelector(".calculator-screen");
+const clearButton = document.querySelector('.clear');
 
-let showTotal = function () {
+
+let showTotal = function () { //function to show the total when calculated on the display
   let total;
   for (let i = 0; i < calculation.length; i++) {
       if (calculation[i] === 'plus-minus'){
@@ -25,37 +27,62 @@ let showTotal = function () {
     // console.log(calculation[i]);
   }
 
-  document.getElementsByClassName("calculator-screen")[0].value = total;
+  document.querySelector(".calculator-screen").value = total;
 };
 
+
+// for each number button clicked this function pushes an alert and is displayed
 const numButtons = document.querySelectorAll(".number");
 numButtons.forEach((button) => {
-  button.addEventListener("click", function pushNumber(event) {
+  button.addEventListener("click", function (event) {
     // console.log(event.target.value);
     alert(event.target.value);
     calculation.push(event.target.value);
+    console.log('calc', calculation);
     showTotal();
   });
 });
 
+const display = document.querySelector('input')
+const clear = document.querySelectorAll('.clear');
+clear.forEach((button) => {
+  button.addEventListener('click', function mrClear (event) {
+calculation.push(event.target.value)
+
+})
+
+})
+
+// for each operator button  ["+", "-", "/", "*", "%", "=", 'C'], shows on display and alerts
 const operatorButtons = document.querySelectorAll(
-  ".operator, .clear, .plus-minus, .percent"
+  ".operator, .plus-minus, .percent"
 );
 operatorButtons.forEach((button) => {
-  button.addEventListener("click", function pushOperator(event) {
+  button.addEventListener("click", function(event) {
+    // console.log('calc', calculation);
     alert(event.target.value);
     calculation.push(event.target.value);
-    console.log({ calculation });
+    console.log(calculation);
     showTotal();
   });
 });
 
-const equals = document.querySelectorAll(".equal-sign");
-equals.forEach((button) => {
-  button.addEventListener("click", function calculate(event) {
+
+
+clearButton.addEventListener('click', function(event) {
+  alert('you clicked the clear button');
+  calcDisplay.value = '0';
+  calculation = [];
+});
+
+
+
+//when equal sign is clicked, it's pushed to the end of the array, then total is calculated
+const equals = document.querySelector(".equal-sign");
+equals.addEventListener("click", function (event) {
     calculation.push("=");
     let total = 0;
-    let symbols = ["+", "-", "/", "*", "%", "="];
+    let symbols = ["+", "-", "/", "*", "%", "=", "C"];
     let previousSymbolIndex = 0;
     let previousSymbol;
     
@@ -64,7 +91,7 @@ equals.forEach((button) => {
           let firstNum;
 
         firstNum = calculation.slice(previousSymbolIndex, i).join("");
-        calculatedNum = parseInt(firstNum)
+        calculatedNum = parseInt(firstNum) //parse int is adding the first num to the array
 
         if(i === 0){
             total = calculatedNum
@@ -78,8 +105,6 @@ equals.forEach((button) => {
         switch (previousSymbol) {
           case '+':
             total = total + calculatedNum;
-            break;
-            
             break;
           case '-':
             total = total - calculatedNum;
@@ -95,16 +120,18 @@ equals.forEach((button) => {
             break;
             case "=" :
                 total = total;
-                break   
+                break  ; 
+            case "C" :
+             total = document.querySelector('input') = '0';
+                break  ; 
         }
         previousSymbol = calculation[i]
 
 
       }
-      document.getElementsByClassName("calculator-screen")[0].value = total;
+      document.querySelector(".calculator-screen").value = total;
     }
     alert(event.target.value);
-    console.log({ calculation });
+    console.log(calculation);
   });
-});
 
